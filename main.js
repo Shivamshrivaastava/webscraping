@@ -1,26 +1,25 @@
 const cheerio = require("cheerio")
-const request = require("request")
 //const { parseHTML } = require("cheerio/lib/static")
 // const{parse} = require("path")
-const url = ("https://www.naukri.com/it-jobs")
-const url2 = ("https://in.indeed.com/jobs?q=Fresher+IT&vjk=f0c27c1a699abef8")
-const url3 = ("https://www.google.com/amp/s/www.myamcat.com/jobs-amp/it-jobs")
-request(url, resp)
-request(url2, resp)
-request(url3, resp)
-// console.log(url)
-// console.log(url2)
-// console.log(url3)
+const request = require("request")
+request("https://www.worldometers.info/coronavirus/", resp)
 function resp(err, response, html) {
-  if (err) {
-    console.log(err)
-  } else {
-    extracthtml(html)
-  }
-}
+    if (err) {
+     console.log(err)
+    } else {
+        extracthtml(html)
 
+    }
+}
 function extracthtml(html) {
-  let $ = cheerio.load(html)
-   let wArr = $(".main_wrapper").text()
-   console.log(wArr)
-  }
+    let parseHTML =cheerio.load(html)
+console.log(parseHTML)
+ }
+ let contentarr = parseHTML(".maincounter-number span").text()
+ console.log(contentarr)
+// let totalcases = parseHTML(contentarr[0]).text()
+// letdeaths = parseHTML(contentarr[1]).text()
+// let recovered = $(contentarr[2]).text()
+// console.log(`totalCovidcases = parseHTML{totalcases}
+//             totalDeath = PARSEHTML{totaldeaths}
+//             Recovered  = PARSEHTML{recovered}`)

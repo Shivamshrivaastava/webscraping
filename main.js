@@ -1,25 +1,23 @@
-const cheerio = require("cheerio")
-//const { parseHTML } = require("cheerio/lib/static")
-// const{parse} = require("path")
-const request = require("request")
-request("https://www.worldometers.info/coronavirus/", resp)
-function resp(err, response, html) {
+const url = "https://www.espncricinfo.com/series/ipl-2020-21-1210595";
+const request = require("request");
+const cheerio = require("cheerio");
+const AllMatcgObj = require("./Allmatch");
+// home page 
+request(url, cb);
+function cb(err, response, html) {
     if (err) {
-     console.log(err)
+        console.log(err);
     } else {
-        extracthtml(html)
-
+        // console.log(html);
+        extractLink(html);
     }
 }
-function extracthtml(html) {
-    let parseHTML =cheerio.load(html)
-console.log(parseHTML)
- }
- let contentarr = parseHTML(".maincounter-number span").text()
- console.log(contentarr)
-// let totalcases = parseHTML(contentarr[0]).text()
-// letdeaths = parseHTML(contentarr[1]).text()
-// let recovered = $(contentarr[2]).text()
-// console.log(`totalCovidcases = parseHTML{totalcases}
-//             totalDeath = PARSEHTML{totaldeaths}
-//             Recovered  = PARSEHTML{recovered}`)
+function extractLink(html) {
+    let $ = cheerio.load(html);
+    let anchorElem = $("a[data-hover='View All Results']");
+    let link = anchorElem.attr("href");
+    // console.log(link);
+    let fullLink = "https://www.espncricinfo.com" + link;
+    // console.log(fullLink);
+    AllMatcgObj.gAlmatches(fullLink);
+}
